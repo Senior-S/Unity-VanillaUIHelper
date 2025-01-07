@@ -38,6 +38,10 @@ namespace SeniorS.UIHelper
             {
                 SetupCanvas();
             }
+            if (GUILayout.Button("Copy path to object"))
+            {
+                CopyPathToObject();
+            }
             if (GUILayout.Button("Download DarkTheme UnityPackage"))
             {
                 DownloadUnityPackage();
@@ -167,6 +171,25 @@ namespace SeniorS.UIHelper
             {
                 AddPrefab("Box/uGUI Box Default Label");
             }
+
+            EditorGUILayout.Space(10);
+            GUILayout.Label("Version: 1.0.2", EditorStyles.boldLabel);
+        }
+
+        private void CopyPathToObject()
+        {
+            if (!CheckSelection()) return;
+            Transform currentTransform = Selection.activeTransform;
+            string path = currentTransform.name;
+            while (currentTransform.parent != null)
+            {
+                currentTransform = currentTransform.parent;
+                path = currentTransform.name + "/" + path;
+                if(currentTransform.name == "Canvas") break;
+            }
+
+            EditorGUIUtility.systemCopyBuffer = path;
+            ShowNotification(new GUIContent("GameObject path copied to clipboard!"));
         }
 
         private void DownloadUnityPackage()
