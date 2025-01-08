@@ -3,6 +3,7 @@ Unity editor window tool to easily add buttons, input fields, toggle and scroll 
 
 # How to install
 Download the lastest available .zip file at releases, go to your Assets/Editor folder and extract there.
+If you see any error related to UnturnedCanvasScaler you may need to downlaod [UnturnedCanvasScaler](https://github.com/Senior-S/Unity-VanillaUIHelper/blob/main/UnturnedCanvasScaler.cs) and place it on your Assets folder.
 
 # How to use
 Go to Tools/Vanilla UI Helper, it will open the editor window with the respective options.
