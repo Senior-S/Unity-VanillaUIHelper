@@ -203,7 +203,7 @@ namespace SeniorS.UIHelper
             EditorGUILayout.EndScrollView();
 
             EditorGUILayout.Space(10);
-            GUILayout.Label("Version: 1.0.2", EditorStyles.boldLabel);
+            GUILayout.Label("Version: 1.0.3", EditorStyles.boldLabel);
         }
 
         private void CopyPathToObject()
