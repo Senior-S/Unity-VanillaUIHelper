@@ -8,6 +8,8 @@ If you see any error related to UnturnedCanvasScaler you may need to downlaod [U
 # How to use
 Go to Tools/Vanilla UI Helper, it will open the editor window with the respective options.
 
+[![](https://dcbadge.limes.pink/api/server/https://discord.gg/Y3jD5K2Q8C)](https://discord.gg/Y3jD5K2Q8C)
+
 # Features:
 - Canvas setup. (Automatically add canvas with proper configuration and UnturnedCanvasScaler script)
 - Copy path to object. (Copy the full path to the object, this option is useful for plugin developers)

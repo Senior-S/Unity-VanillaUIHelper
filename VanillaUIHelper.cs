@@ -9,7 +9,10 @@ namespace SeniorS.UIHelper
 {
     public class VanillaUIHelper : EditorWindow
     {
-        private const string darkThemePackageLink = "https://github.com/DanielWillett/UnturnedUIAssets/raw/refs/heads/main/UI/uGUI/DarkTheme/uGUI%20Assets.unitypackage";
+        private const string darkThemePackageLink =
+            "https://github.com/DanielWillett/UnturnedUIAssets/raw/refs/heads/main/UI/uGUI/DarkTheme/uGUI%20Assets.unitypackage";
+
+        private Vector2 scrollPosition;
 
         [MenuItem("Tools/Vanilla UI Helper")]
         public static void OpenWindow()
@@ -21,7 +24,9 @@ namespace SeniorS.UIHelper
         {
             if (!Directory.Exists("Assets/BlazingFlame/uGUI/Prefabs"))
             {
-                EditorUtility.DisplayDialog("Vanilla UI Helper", "This tool requires the DarkTheme unitypackage from Daniel Willett (BlazingFlame) you can download it manually clicking on 'DarkTheme package link' or using the button above it.", "OK");
+                EditorUtility.DisplayDialog("Vanilla UI Helper",
+                    "This tool requires the DarkTheme unitypackage from Daniel Willett (BlazingFlame) you can download it manually clicking on 'DarkTheme package link' or using the button above it.",
+                    "OK");
                 return;
             }
         }
@@ -32,20 +37,25 @@ namespace SeniorS.UIHelper
             GUILayout.Label("by SeniorS", EditorStyles.miniLabel);
             EditorGUILayout.Space(8);
 
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Width(position.width), GUILayout.Height(position.height - 80f));
+
             GUILayout.Label("Essential", EditorStyles.boldLabel);
             EditorGUILayout.Space(2);
             if (GUILayout.Button("Setup Canvas"))
             {
                 SetupCanvas();
             }
+
             if (GUILayout.Button("Copy path to object"))
             {
                 CopyPathToObject();
             }
+
             if (GUILayout.Button("Download DarkTheme UnityPackage"))
             {
                 DownloadUnityPackage();
             }
+
             if (GUILayout.Button("DarkTheme package link"))
             {
                 Application.OpenURL("https://github.com/DanielWillett/UnturnedUIAssets/blob/main/UI/uGUI/DarkTheme/uGUI%20Assets.unitypackage");
@@ -55,6 +65,7 @@ namespace SeniorS.UIHelper
             {
                 Application.OpenURL("https://github.com/DanielWillett/UnturnedUIAssets/tree/main");
             }
+
             EditorGUILayout.Space(2);
 
             GUILayout.Label("Button", EditorStyles.label);
@@ -63,14 +74,17 @@ namespace SeniorS.UIHelper
             {
                 AddPrefab("Button/uGUI Button");
             }
+
             if (GUILayout.Button("Disableable Button"))
             {
                 AddPrefab("Button/uGUI Disableable Button");
             }
+
             if (GUILayout.Button("Right Clickable Button"))
             {
                 AddPrefab("Button/uGUI RightClickable Button");
             }
+
             if (GUILayout.Button("Disableable Right Clickable Button"))
             {
                 AddPrefab("Button/uGUI Disableable RightClickable Button");
@@ -83,6 +97,7 @@ namespace SeniorS.UIHelper
             {
                 AddPrefab("Input Field/uGUI Input Field");
             }
+
             if (GUILayout.Button("Disableable Input Field"))
             {
                 AddPrefab("Input Field/uGUI Disableable Input Field");
@@ -95,14 +110,17 @@ namespace SeniorS.UIHelper
             {
                 AddPrefab("Label/uGUI Default Label");
             }
+
             if (GUILayout.Button("Outline Label"))
             {
                 AddPrefab("Label/uGUI Outline Label");
             }
+
             if (GUILayout.Button("Shadow Label"))
             {
                 AddPrefab("Label/uGUI Shadow Label");
             }
+
             if (GUILayout.Button("Tooltip"))
             {
                 AddPrefab("Label/uGUI Tooltip");
@@ -115,18 +133,22 @@ namespace SeniorS.UIHelper
             {
                 AddPrefab("ScrollView/uGUI ScrollView");
             }
+
             if (GUILayout.Button("Alternative ScrollView"))
             {
                 AddScrollViewCode();
             }
+
             if (GUILayout.Button("ScrollView (Vertical)"))
             {
                 AddPrefab("ScrollView/uGUI ScrollView (Vertical)");
             }
+
             if (GUILayout.Button("ScrollView (Horizontal)"))
             {
                 AddPrefab("ScrollView/uGUI ScrollView (Horizontal)");
             }
+
             if (GUILayout.Button("Disableable ScrollView"))
             {
                 AddPrefab("ScrollView/uGUI Disableable ScrollView");
@@ -139,14 +161,17 @@ namespace SeniorS.UIHelper
             {
                 AddPrefab("Toggle/uGUI Toggle");
             }
+
             if (GUILayout.Button("Alternative Toggle"))
             {
                 AddToggleCode();
             }
+
             if (GUILayout.Button("Plugin-Controlled Toggle"))
             {
                 AddPrefab("Toggle/uGUI Plugin-Controlled Toggle");
             }
+
             if (GUILayout.Button("Disableable Toggle"))
             {
                 AddPrefab("Toggle/uGUI Disableable Toggle");
@@ -159,18 +184,23 @@ namespace SeniorS.UIHelper
             {
                 AddPrefab("Box/uGUI Box");
             }
+
             if (GUILayout.Button("Shadow Box Label"))
             {
                 AddPrefab("Box/uGUI Box Shadow Label");
             }
+
             if (GUILayout.Button("Outline Box Label"))
             {
                 AddPrefab("Box/uGUI Box Outline Label");
             }
+
             if (GUILayout.Button("Default Box Label"))
             {
                 AddPrefab("Box/uGUI Box Default Label");
             }
+
+            EditorGUILayout.EndScrollView();
 
             EditorGUILayout.Space(10);
             GUILayout.Label("Version: 1.0.2", EditorStyles.boldLabel);
@@ -185,7 +215,7 @@ namespace SeniorS.UIHelper
             {
                 currentTransform = currentTransform.parent;
                 path = currentTransform.name + "/" + path;
-                if(currentTransform.name == "Canvas") break;
+                if (currentTransform.name == "Canvas") break;
             }
 
             EditorGUIUtility.systemCopyBuffer = path;
@@ -232,7 +262,9 @@ namespace SeniorS.UIHelper
                 EditorUtility.DisplayDialog("Vanilla UI Helper", "Canvas must only be added to gameobject called 'Effect'.", "OK");
                 return;
             }
-            GameObject canvasGameObject = new GameObject("Canvas", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
+
+            GameObject canvasGameObject =
+                new GameObject("Canvas", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
             canvasGameObject.transform.SetParent(effectGameObject.transform);
             RectTransform rectTransform = canvasGameObject.GetComponent<RectTransform>();
             SetupRectTransform(rectTransform);
@@ -247,7 +279,7 @@ namespace SeniorS.UIHelper
             CanvasScaler scaler = canvasGameObject.GetComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
             scaler.scaleFactor = 1f;
-            scaler.referencePixelsPerUnit = 25;
+            scaler.referencePixelsPerUnit = 100;
 
             UnturnedCanvasScaler unturnedCanvasScaler = canvasGameObject.AddComponent<UnturnedCanvasScaler>();
             unturnedCanvasScaler.scaler = scaler;
@@ -331,7 +363,7 @@ namespace SeniorS.UIHelper
             Image viewportImage = viewportGameObject.GetComponent<Image>();
             viewportImage.color = new Color(0.9f, 0.9f, 0.9f, 0.4f);
             viewportImage.type = Image.Type.Sliced;
-            viewportImage.pixelsPerUnitMultiplier = 0.8f;
+            viewportImage.pixelsPerUnitMultiplier = 1.5f;
             viewportImage.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/BlazingFlame/uGUI/Box.png");
 
             GameObject contentGameObject = new GameObject("Content", typeof(RectTransform), typeof(Image));
@@ -380,12 +412,12 @@ namespace SeniorS.UIHelper
             SetupRectTransform(verticalHandleRectTransform, 20, 20);
             StrecthRectTransform(verticalHandleRectTransform);
             verticalHandleRectTransform.sizeDelta = new Vector2(8, 20);
-            
+
             Image verticalHandleImage = verticalHandleGameObject.GetComponent<Image>();
             verticalHandleImage.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/BlazingFlame/uGUI/Box.png");
             verticalHandleImage.color = new Color(0.9f, 0.9f, 0.9f, 0.9f);
             verticalHandleImage.type = Image.Type.Sliced;
-            verticalHandleImage.pixelsPerUnitMultiplier = 0.4f;
+            verticalHandleImage.pixelsPerUnitMultiplier = 1.5f;
 
             Scrollbar verticalScrollbar = verticalScrollGameObject.GetComponent<Scrollbar>();
             verticalScrollbar.direction = Scrollbar.Direction.BottomToTop;
@@ -419,7 +451,7 @@ namespace SeniorS.UIHelper
 
         private bool CheckSelection()
         {
-            if(Selection.activeTransform == null)
+            if (Selection.activeTransform == null)
             {
                 EditorUtility.DisplayDialog("Vanilla UI Helper", "Please select a gameobject to add UI elements to.", "OK");
                 return false;
